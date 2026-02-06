@@ -1,0 +1,45 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout repository
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2. Setup Node.js environment
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: npm ci
+
+      # 4. Build project
+      - name: Build
+        run: npm run build
+        # This generates the out/ directory with static files
+
+      # 5. Create .nojekyll file (disable Jekyll processing)
+      - name: Create .nojekyll
+        run: touch out/.nojekyll
+
+      # 6. Deploy to target repository
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          ssh-key: ${{ secrets.DEPLOY_KEY }}
+          repository-name: casbin/casbin-website-v3.github.io
+          branch: main
+          folder: out
+          clean: true

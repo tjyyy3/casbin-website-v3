@@ -7,8 +7,6 @@ import { useCopyButton } from "fumadocs-ui/utils/use-copy-button";
 import { buttonVariants } from "../ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { cva } from "class-variance-authority";
-import { getMarkdownContent } from "@/lib/get-markdown-content";
-
 const cache = new Map<string, string>();
 
 export function LLMCopyButton({
@@ -23,15 +21,8 @@ export function LLMCopyButton({
   const [checked, onClick] = useCopyButton(async () => {
     try {
       setLoading(true);
-      const cacheKey = slugs.join("/");
-      const cached = cache.get(cacheKey);
-      const content = cached || (await getMarkdownContent(slugs));
-
-      if (!cached) {
-        cache.set(cacheKey, content);
-      }
-
-      await navigator.clipboard.writeText(content);
+      // Copy Markdown temporarily disabled
+      throw new Error("Copy Markdown is temporarily disabled in static export mode");
     } catch (error) {
       console.error("Failed to copy markdown to clipboard:", error);
       const errorMessage = error instanceof Error ? error.message : String(error);

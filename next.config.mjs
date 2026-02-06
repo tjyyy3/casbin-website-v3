@@ -11,11 +11,14 @@ const withMDX = createMDX({
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
+  output: 'export',
+  distDir: 'out',
   // i18n: {
   //   locales: ['en', 'zh', 'ja', 'ko', 'fr', 'de', 'es', 'ru', 'ar', 'pt', 'it', 'tr', 'id', 'th', 'ms', 'uk', 'vi'],
   //   defaultLocale: 'en',
   // },
   images: {
+    unoptimized: true,  // 静态导出必须禁用图片优化
     remotePatterns: [
       {
         protocol: "https",

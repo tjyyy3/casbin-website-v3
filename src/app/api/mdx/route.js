@@ -1,3 +1,5 @@
+export const dynamic = "force-static";
+
 export async function GET(request) {
   // This stub forwards to the TypeScript implementation during development/build.
   // It exists to satisfy TypeScript imports that reference the .js path.

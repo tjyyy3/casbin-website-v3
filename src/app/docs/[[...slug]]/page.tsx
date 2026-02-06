@@ -9,7 +9,7 @@ import { createRelativeLink } from "fumadocs-ui/mdx";
 import * as Twoslash from "fumadocs-twoslash/ui";
 import Link from "next/link";
 import { Feedback } from "@/components/feedback/client";
-import { onPageFeedbackAction } from "@/lib/github";
+// import { onPageFeedbackAction } from "@/lib/github";
 import { LastUpdated } from "@/components/last-updated";
 import Comments from "@/components/Comments";
 import { AuthorCard } from "@/components/blog/AuthorCard";
@@ -72,7 +72,7 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
           )}
           {page.path && (
             <div className="flex flex-row gap-2 shrink-0">
-              <LLMCopyButton slugs={page.slugs} />
+              {/* <LLMCopyButton slugs={page.slugs} /> */}
               <ViewOptions pagePath={page.path} githubUrl={githubUrl} />
             </div>
           )}
@@ -87,7 +87,7 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
           })}
         />
       </DocsBody>
-      <Feedback onSendAction={onPageFeedbackAction} />
+      {/* <Feedback onSendAction={onPageFeedbackAction} /> */}
       <LastUpdated filePath={filePath} />
     </DocsPage>
   );

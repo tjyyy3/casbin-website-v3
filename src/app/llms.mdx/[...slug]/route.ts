@@ -2,7 +2,18 @@ import { getLLMText, source } from '@/lib/source';
 import { NextRequest } from 'next/server';
 import { notFound } from 'next/navigation';
 
+export const dynamic = "force-static";
 export const revalidate = false;
+
+export async function generateStaticParams() {
+  // Get all documentation pages
+  const pages = source.getPages();
+  
+  // Return all possible slug combinations
+  return pages.map((page) => ({
+    slug: page.slugs,
+  }));
+}
 
 export async function GET(
   _req: NextRequest,
